@@ -3,9 +3,10 @@ checkpoints/*
 
 models/*
 !models/gravity/
+!models/DINOv3/
 
 configs/*
-!configs/gravity_config.json
+!configs/gravity_config.yaml
 
 data_backup/
 

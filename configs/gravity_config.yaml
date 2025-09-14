@@ -1,0 +1,32 @@
+exp_name: gravity_1024_256n_0.125scores
+exp_type: loc_pair
+seed: 42
+data:
+  dataset: LuSNAR
+  batch_size: 8
+  left_image_size: 1024
+  sat_image_size: 1024
+  aug: True
+  max_train_init_offset: 20
+  max_test_init_offset: 20
+  max_aug_offset: 70
+  max_aug_rotate: 180
+model:
+  name: GRAVITY
+  num_nodes: 256
+  hid_dim: 64
+  num_fusion_layers: 4
+  num_fusion_heads: 4
+  device: cuda:0
+trainer:
+  num_epochs: 10
+  optimizer: AdamW
+  lr: 1e-4
+  weight_decay: 0.01
+  betas: [0.9, 0.999]
+  eps: 1e-8
+  num_warmup_steps: 500
+  mixed_precision: false
+evaluator:
+  metrics: [translation_xyz, pcp_at_0.3m, pcp_at_0.5m, pcp_at_1m]
+  loss_metric: translation_xyz
