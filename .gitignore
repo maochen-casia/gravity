@@ -1,0 +1,17 @@
+checkpoints/*
+!checkpoints/gravity_1024_256n_0.125scores/
+
+models/*
+!models/gravity/
+
+configs/*
+!configs/gravity_config.json
+
+data_backup/
+
+utils_backup/
+
+figures/
+
+__pycache__/
+
