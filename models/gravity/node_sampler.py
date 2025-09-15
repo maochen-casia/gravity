@@ -11,7 +11,11 @@ class NodeSampler(nn.Module):
         self.num_nodes = num_nodes
         self.scale = scale
 
-        self.weight_proj = nn.Conv2d(hid_dim, scale*scale, kernel_size=1, padding=0)
+        self.weight_proj = nn.Sequential(
+            nn.Conv2d(hid_dim, hid_dim, kernel_size=3, padding=1),
+            nn.GELU(),
+            nn.Conv2d(hid_dim, scale*scale, kernel_size=1, padding=0)
+        )
         self.feat_proj = nn.Conv2d(hid_dim, hid_dim, kernel_size=1, padding=0)
 
     def simple_nms(self, scores, nms_radius, mask_val='-inf'):

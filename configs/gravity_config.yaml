@@ -1,4 +1,4 @@
-exp_name: gravity_1024_256n
+exp_name: gravity_1024_256n_conv3
 exp_type: loc_pair
 seed: 42
 data:
