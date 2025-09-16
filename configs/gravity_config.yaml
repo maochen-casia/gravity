@@ -1,5 +1,6 @@
-exp_name: gravity_1024_256n_conv3
+exp_name: gravity_1024_256n_conv3_64finetune
 exp_type: loc_pair
+pretrain_checkpoint: gravity_1024_256n_conv3
 seed: 42
 data:
   dataset: LuSNAR
@@ -13,7 +14,7 @@ data:
   max_aug_rotate: 180
 model:
   name: GRAVITY
-  num_nodes: 256
+  num_nodes: 64
   hid_dim: 64
   num_fusion_layers: 4
   num_fusion_heads: 4

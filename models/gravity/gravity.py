@@ -52,6 +52,23 @@ class GRAVITY(nn.Module):
         params = [{'params': [p for p in self.parameters() if p.requires_grad], 'lr_scale': 1}]
         return params
     
+    def finetune(self):
+        """
+        Freezes all parameters in the model and then unfreezes the
+        parameters of node_sampler.weight_proj and
+        node_fusion.node_weight_proj for fine-tuning.
+        """
+        # First, freeze all the parameters in the model
+        for param in self.parameters():
+            param.requires_grad = False
+
+        # Then, unfreeze the parameters of the specified submodules
+        for param in self.node_sampler.weight_proj.parameters():
+            param.requires_grad = True
+
+        for param in self.node_fusion.node_weight_proj.parameters():
+            param.requires_grad = True
+    
     def state_dict(self, destination=None, prefix='', keep_vars=False):
         """
         Overrides the default state_dict() method to exclude the parameters

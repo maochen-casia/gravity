@@ -30,6 +30,12 @@ def main():
     set_seed(config.seed)
 
     model = build_model(config.model)
+    pretrain_checkpoint = config.get('pretrain_checkpoint', None)
+    if pretrain_checkpoint is not None:
+        pretrain_checkpoint, _ = build_checkpoint_logger(OmegaConf.create({'exp_name':pretrain_checkpoint}), 
+                                                         need_logger=False)
+        model.load_state_dict(pretrain_checkpoint.best_val_param)
+        model.finetune()
     #model = compile_and_warmup_model(model, config.data.batch_size)
 
     trainer, val_evaluator, test_evaluator = build_trainer_evaluator(config, model, data_loaders)

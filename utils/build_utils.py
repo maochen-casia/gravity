@@ -5,9 +5,9 @@ from .logger import Logger
 from .dataset import LocDataset, read_data
 from torch.utils.data import DataLoader
 
-def build_checkpoint_logger(config):
+def build_checkpoint_logger(config, need_logger=True):
     checkpoint = Checkpoint(config)
-    logger = Logger(checkpoint.save_dir)
+    logger = Logger(checkpoint.save_dir) if need_logger else None
     print('Checkpoint and logger built successfully.')
     return checkpoint, logger
 
